@@ -1,0 +1,22 @@
+Trying to fill origin with locator: ('css selector', '[data-test="SearchField-input"]') and value: New York
+Origin city list texts after fill_text:
+- New York, United States
+- 250 km around New York
+- JFK John F. Kennedy International
+21 km from the city center
+- EWR Newark Liberty International
+14 km from the city center
+- LGA LaGuardia
+13 km from the city center
+- SWF New York Stewart International Airport
+88 km from the city center
+- New York
+Clicking element with text: New York, United States
+- Los Angeles, United States
+- 250 km around Los Angeles
+- LAX Los Angeles International
+19 km from the city center
+- Los Angeles Metropolitan Area
+Clicking element with text: Los Angeles, United States
+Clicking date: 2025-10-01
+Clicking date: 2025-11-15
