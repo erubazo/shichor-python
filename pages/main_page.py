@@ -68,6 +68,8 @@ class MainPage(BasePage):
     CANCEL = (By.CSS_SELECTOR, '[data-test="SearchFormCancelButton"]')
     SWITCH = (By.CSS_SELECTOR, '[aria-label="Switch direction"]')
     CITY_NOT_FOUND = (By.CSS_SELECTOR, '#react-view > div.flex.min-h-screen.flex-col > div:nth-child(2) > div.min-h-\[388px\].relative.lm\:min-h-\[391px\].lm\:bg-ink-normal.lm\:pt-1000.pt-600.tb\:pt-\[58px\].tb\:pb-\[36px\].de\:pt-\[90px\].de\:pt-\[26px\].ld\:pt-\[60px\] > div.relative > div:nth-child(2) > div.relative.z-10.rounded-150.bg-white-normal.lm\:shadow-level3.-mt-300.translate-y-300.px-300.pt-400.pb-300.shadow-level3.min-h-\[378px\].lm\:-mt-800.lm\:min-h-\[252px\].lm\:translate-y-800.lm\:p-400.tb\:mt-0.tb\:min-h-\[264px\].tb\:transform-none.de\:rounded-200.de\:p-600.de\:pt-300.de\:min-h-\[268px\].ld\:min-h-\[160px\].ld\:pb-400 > div.flex.ld\:flex-row.flex-col.gap-300.lm\:gap-200 > div > div:nth-child(1) > div > div > div.absolute.z-\[101\].rounded-100.bg-white-normal.shadow-level3.w-auto.-left-300.-right-300.-top-300.ld\:w-\[374px\] > div > div > div > p')
+    ECONOMY_YNET = (By.CSS_SELECTOR, '#BottomHeaderArea > div.mainNav > div.navList > div:nth-child(6)')
+    TITLES = (By.CSS_SELECTOR, 'h2 > span')
 
     def __init__(self, driver):
         super().__init__(driver)
