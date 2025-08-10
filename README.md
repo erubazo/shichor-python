@@ -1,23 +1,62 @@
-✈️ Travel Booking Automation Test Suite
-This repository contains a Selenium-based automated test suite written in Python using the Pytest framework. The tests simulate user interactions with a travel booking website, including cookie preferences, link verification, class and passenger selection, date selection, and full booking flows for various cabin classes.
+# Shichor Automation Project
 
-🧪 Features Tested
-✅ Cookie customization and validation
+This project contains automated tests for the Shichor application. It uses Selenium for browser automation and Pytest as the test framework.
 
-🔗 Navigation and link integrity checks
+## Project Structure
 
-🎫 Trip type selection (One-way / Return)
+The project is structured as follows:
 
-💺 Travel class selection (Economy, Premium, Business, First Class)
+-   `pages/`: Contains page object models.
+    -   `base_page.py`: Base class for all page objects.
+    -   `cookie_page.py`: Page object for handling cookies.
+    -   `currency_page.py`: Page object for currency-related functionalities.
+    -   `main_page.py`: Page object for the main page.
+    -   `signin_page.py`: Page object for sign-in functionalities.
+-   `tests/`: Contains test scripts.
+    -   `base_test.py`: Base class for all tests, providing setup and teardown methods.
+    -   `conftest.py`: Contains Pytest fixtures.
+    -   `currency_test.py`: Tests for currency functionalities.
+    -   `mainpage_test.py`: Tests for the main page functionalities.
+    -   `sign_in_test.py`: Tests for sign-in functionalities.
+-   `allure-results/`: Contains Allure test results (generated after test execution).
 
-🧍 Passenger selection logic
+## Requirements
 
-🌍 Origin and destination selection
+-   Python 3.7+
+-   Selenium
+-   Pytest
+-   Faker
+-   Requests
+-   Allure (optional, for reporting)
 
-📅 Departure and return date pickers
+## Setup
 
-🔄 Switching origin and destination fields
+1.  **Clone the repository:**
 
-🧭 Multi-city flight selection
+    ```bash
+    git clone <repository_url>
+    cd shichor-automation
+    ```
 
-🔍 Full booking workflow verification (title-based)
+2.  **Create a virtual environment (recommended):**
+
+    ```bash
+    python -m venv venv
+    source venv/Scripts/activate  # On Windows: venv\Scripts\activate
+    ```
+
+3.  **Install dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Running Tests
+
+To run the tests, use the following command:
+
+```bash
+pytest tests/mainpage_test.py -v
+pytest tests/sign_in_test.py -v
+pytest tests/currency_test.pyy -v
+
