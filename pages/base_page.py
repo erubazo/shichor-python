@@ -11,7 +11,7 @@ class BasePage:
     def __init__(self, driver):
         self.driver: WebDriver = driver
 
-    def highlight_element(self, driver, locator_or_element, color: str):
+    def highlight_element(self, locator_or_element, color: str):
         """
         Highlights (briefly) a web element by changing its background color.
         Accepts either a locator tuple or a WebElement.
@@ -44,7 +44,7 @@ class BasePage:
             """, element, original_style)
 
     def fill_text(self, locator, text):
-        self.highlight_element(self.driver, locator, "Yellow")
+        self.highlight_element(locator, "Yellow")
         self.driver.find_element(*locator).clear()
         self.driver.find_element(*locator).send_keys(text)
 
@@ -55,18 +55,18 @@ class BasePage:
 
     def click(self, locator):
         time.sleep(1)
-        self.highlight_element(self.driver, locator, "Yellow")
+        self.highlight_element(locator, "Yellow")
         self.driver.find_element(*locator).click()
         time.sleep(3)
 
     def click_by_offset(self, x_offset, y_offset):
-        self.highlight_element(self.driver, ("xpath", "//body"), "Yellow")
+        self.highlight_element(("xpath", "//body"), "Yellow")
         action = ActionChains(self.driver)
         action.move_by_offset(x_offset, y_offset).click().perform()
         time.sleep(3)
 
     def scroll_to_element(self, locator):
-        self.highlight_element(self.driver, locator, "Yellow")
+        self.highlight_element(locator, "Yellow")
         element = self.driver.find_element(*locator)
         action = ActionChains(self.driver)
         action.move_to_element(element).perform()
@@ -81,23 +81,23 @@ class BasePage:
         else:
             elements = items
         for el in elements:
-            self.highlight_element(self.driver, el, "Yellow")
+            self.highlight_element(el, "Yellow")
             action = ActionChains(self.driver)
             action.move_to_element(el).perform()
             time.sleep(1)
 
     def get_text(self, locator):
-        self.highlight_element(self.driver, locator, "Orange")
+        self.highlight_element(locator, "Orange")
         return self.driver.find_element(*locator).text
 
     def click_and_hold(self, locator):
-        self.highlight_element(self.driver, locator, "Yellow")
+        self.highlight_element(locator, "Yellow")
         element = self.driver.find_element(*locator)
         action = ActionChains(self.driver)
         action.click_and_hold(element).perform()
 
     def select(self, locator, value, by_visible_text=False):
-        self.highlight_element(self.driver, locator, "Yellow")
+        self.highlight_element(locator, "Yellow")
         select_element = Select(self.driver.find_element(*locator))
         if by_visible_text:
             select_element.select_by_visible_text(value)

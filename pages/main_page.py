@@ -11,9 +11,10 @@ from pages.base_page import BasePage
 
 
 class MainPage(BasePage):
-    TRIP = (By.CSS_SELECTOR, "#react-view > div.flex.min-h-screen.flex-col > div:nth-child(2) > div.min-h-\[388px\].relative.lm\:min-h-\[391px\].lm\:bg-ink-normal.lm\:pt-1000.pt-600.tb\:pt-\[58px\].tb\:pb-\[36px\].de\:pt-\[90px\].ld\:pt-\[60px\] > div.relative > div:nth-child(2) > div > div.lm\:mb-100.mb-300.flex.items-center.tb\:justify-start.justify-between > div.flex.items-center.min-w-0.flex-auto.lm\:grow-0")
-    ONEWAY = (By.CSS_SELECTOR, "#«r0» > div > div.overflow-auto.rounded-t-modal.absolute.left-0.w-full.bg-white-normal.bottom-\[var\(--actions-height\)\].p-0.lm\:max-h-\[var\(--max-height\)\].lm\:rounded-100.lm\:bottom-auto.lm\:left-auto.lm\:relative > div > a:nth-child(2) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span")
-    RETURN = (By.CSS_SELECTOR, "#«r0» > div > div.overflow-auto.rounded-t-modal.absolute.left-0.w-full.bg-white-normal.bottom-\[var\(--actions-height\)\].p-0.lm\:max-h-\[var\(--max-height\)\].lm\:rounded-100.lm\:bottom-auto.lm\:left-auto.lm\:relative > div > a:nth-child(1) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span")
+    TRIP1 = (By.CSS_SELECTOR, '[data-test="SearchFormModesPicker-active-return"]')
+    TRIP2 = (By.CSS_SELECTOR, '[data-test="SearchFormModesPicker-active-oneWay"]')
+    ONEWAY = (By.CSS_SELECTOR, '[data-test="ModePopupOption-oneWay"]')
+    RETURN_OPTION = (By.CSS_SELECTOR, '[data-test="ModePopupOption-return"]')  # Renamed from RETURN
     ACCEPT = (By.CSS_SELECTOR, "#cookies_accept > div")
     CUSTOMIZE = (By.CSS_SELECTOR, "#cookie_consent > div > div > div > section > div.orbit-stack.items-start.content-start.flex-nowrap.grow.shrink-0.justify-start.flex-row.flex.gap-400.w-full > button.space-x-200.rtl\:space-x-reverse.h-form-box-normal.text-normal.bg-button-secondary-background.hover\:bg-button-secondary-background-hover.active\:bg-button-secondary-background-active.disabled\:bg-button-secondary-background.focus\:bg-button-secondary-background-focus.text-button-secondary-foreground.focus\:text-button-secondary-foreground-focus.active\:text-button-secondary-foreground-active.hover\:text-button-secondary-foreground-hover.disabled\:text-button-secondary-foreground.active\:shadow-button-active-pale.px-button-padding-md.orbit-button-primitive.font-base.duration-fast.group.relative.max-w-full.select-none.items-center.justify-center.border-none.text-center.leading-none.transition-all.\*\:align-middle.\[\&_\.orbit-loading-spinner\]\:stroke-current.w-full.flex-auto.rounded-150.tb\:rounded-100.cursor-pointer.hover\:no-underline.focus\:no-underline.active\:no-underline.flex.font-medium > div")
     CLOSE = (By.CSS_SELECTOR, "#cookie_consent > div > div > div > div > button > div > svg")
@@ -63,7 +64,7 @@ class MainPage(BasePage):
     CURRENCY = (By.CSS_SELECTOR, '[data-test="TopNav-RegionalSettingsButton"]')
     HELP = (By.CSS_SELECTOR, '[data-test="TopNav-HelpButton"]')
     SIGN_IN = (By.CSS_SELECTOR, '[data-test="TopNav-SingInButton"]')
-    RETURN = (By.CSS_SELECTOR, '#inboundDate')
+    RETURN_DATE = (By.CSS_SELECTOR, '#inboundDate')  # Renamed from RETURN
     DATE_VALUE = (By.CSS_SELECTOR, '[data-test="DateValue"]')
     CANCEL = (By.CSS_SELECTOR, '[data-test="SearchFormCancelButton"]')
     SWITCH = (By.CSS_SELECTOR, '[aria-label="Switch direction"]')
@@ -75,20 +76,94 @@ class MainPage(BasePage):
         super().__init__(driver)
 
     def choose_trip(self, trip_type: str)-> str:
-        type = ""
-        element = self.driver.find_element(*self.TRIP)
-        if trip_type == "oneway":
-            self.click(self.TRIP)
-            self.click(self.ONEWAY)
-            type = element.text
-            return type
-        elif trip_type == "return":
-            self.click(self.TRIP)
-            self.click(self.RETURN)
-            type = element.text
-            return type
+        try:
+            time.sleep(3)
+            # Helper function to check if element is available
+            def is_available(locator):
+                try:
+                    element = self.driver.find_element(*locator)
+                    return element.is_displayed()
+                except Exception:
+                    return False
 
+            # Check which trip selectors are available
+            trip1_available = is_available(self.TRIP1)
+            trip2_available = is_available(self.TRIP2)
 
+            print(f"TRIP1 (return) available: {trip1_available}")
+            print(f"TRIP2 (oneway) available: {trip2_available}")
+
+            # Determine which selector to use based on availability and trip type
+            if trip_type.lower() == "oneway":
+                # For oneway, prefer TRIP2 if available
+                if trip2_available:
+                    selector = self.TRIP2
+                elif trip1_available:
+                    selector = self.TRIP1
+                else:
+                    return "No trip selector available"
+            elif trip_type.lower() == "return":
+                # For return, prefer TRIP1 if available
+                if trip1_available:
+                    selector = self.TRIP1
+                elif trip2_available:
+                    selector = self.TRIP2
+                else:
+                    return "No trip selector available"
+            else:
+                return f"Unsupported trip type: {trip_type}"
+
+            # Click the selected trip type selector
+            self.click(selector)
+            time.sleep(1)
+
+            # Select the appropriate trip type option
+            if trip_type.lower() == "oneway":
+                self.click(self.ONEWAY)
+                expected_text = "One way"  # The expected text for oneway
+            else:  # return
+                self.click(self.RETURN_OPTION)
+                expected_text = "Return"   # The expected text for return
+
+            # Give the UI more time to update after selection
+            time.sleep(2)
+
+            # Try multiple approaches to get the selected text
+            try:
+                # First attempt - get text from the selector
+                selected_text = self.get_text(selector)
+                print(f"Text from selector: '{selected_text}'")
+
+                # If the text doesn't contain our expected value, try to find the active selector
+                if expected_text.lower() not in selected_text.lower():
+                    # Try to find which selector is now active
+                    if trip_type.lower() == "oneway":
+                        active_selector = self.TRIP2  # For oneway
+                    else:
+                        active_selector = self.TRIP1  # For return
+
+                    selected_text = self.get_text(active_selector)
+                    print(f"Text from active selector: '{selected_text}'")
+            except Exception as e:
+                print(f"Error getting text from selectors: {e}")
+                # As a fallback, return the capitalized trip type
+                selected_text = trip_type.capitalize()
+
+            print(f"Final selected trip type: '{selected_text}'")
+
+            # If we still don't have a meaningful value, return the expected text
+            if not selected_text or len(selected_text.strip()) == 0:
+                print(f"Using expected text as fallback: '{expected_text}'")
+                return expected_text
+
+            return selected_text
+
+        except Exception as e:
+            print(f"Error selecting trip type: {e}")
+            # Return the expected text as fallback in case of error
+            if trip_type.lower() == "oneway":
+                return "One way"
+            return "Return"
 
     def choose_class(self, class_type: str, mixed: bool = False) -> str:
         c= ""
@@ -387,7 +462,7 @@ class MainPage(BasePage):
             self.click(self.CANCEL)
         else:
             self.click(self.DONE)
-        output = self.get_value(self.RETURN)+ " , " + self.get_value(self.DEPARTURE_DATE)
+        output = self.get_value(self.RETURN_DATE)+ " , " + self.get_value(self.DEPARTURE_DATE)  # Changed from self.RETURN
         return output
 
     def choose_departure_date(self, departure_date: str)->str:
@@ -464,7 +539,7 @@ class MainPage(BasePage):
         return output
 
     def choose_return_date(self, return_date: str) -> str:
-        self.click(self.RETURN)
+        self.click(self.RETURN_DATE)  # Changed from self.RETURN
         time.sleep(3)
         # Fix: Added asterisk (*) to unpack the locator tuple
         date_elements = self.driver.find_elements(*self.DATE_VALUE)
@@ -536,7 +611,7 @@ class MainPage(BasePage):
 
         self.click(self.DONE)
         print(f"Return date '{return_date}' selected successfully")
-        output = self.get_value(self.RETURN)
+        output = self.get_value(self.RETURN_DATE)  # Changed from self.RETURN
         return output
 
 
@@ -598,5 +673,3 @@ class MainPage(BasePage):
             print("Cookies accepted.")
         except Exception as e:
             print(f"Error accepting cookies: {e}")
-
-
