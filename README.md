@@ -1,5 +1,8 @@
 # Shichor Automation Project
 
+<img width="2529" height="1220" alt="image" src="https://github.com/user-attachments/assets/b9811da3-242c-4456-aeba-2ce6d07bc325" />
+
+
 This project contains automated tests for the Shichor application. It uses Selenium for browser automation and Pytest as the test framework.
 
 ## Project Structure
