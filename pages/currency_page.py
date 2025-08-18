@@ -1,5 +1,7 @@
 import time
 import datetime
+
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from pages.cookie_page import CookiePage
@@ -19,6 +21,7 @@ class CurrencyPage(BasePage):
         from pages.main_page import MainPage
         return MainPage(self.driver)
 
+    @allure.step("Select currency: {coin} from the dropdown")
     def select_currency(self, coin: str):
         self.main_page.click(self.main_page.ACCEPT)
         self.main_page.click(self.main_page.CURRENCY)
@@ -34,6 +37,7 @@ class CurrencyPage(BasePage):
                 return
         raise ValueError(f"Currency '{coin}' not found in the dropdown options.")
 
+    @allure.step("Select country: {country} and language: {lan} from the dropdown")
     def select_region(self, country: str, lan: str = "English"):
         self.main_page.click(self.main_page.ACCEPT)
         self.main_page.click(self.main_page.CURRENCY)

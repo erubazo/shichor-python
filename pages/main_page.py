@@ -1,6 +1,8 @@
 import re
 import time
 import datetime
+
+import allure
 import requests
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -18,12 +20,12 @@ class MainPage(BasePage):
     ACCEPT = (By.CSS_SELECTOR, "#cookies_accept > div")
     CUSTOMIZE = (By.CSS_SELECTOR, "#cookie_consent > div > div > div > section > div.orbit-stack.items-start.content-start.flex-nowrap.grow.shrink-0.justify-start.flex-row.flex.gap-400.w-full > button.space-x-200.rtl\:space-x-reverse.h-form-box-normal.text-normal.bg-button-secondary-background.hover\:bg-button-secondary-background-hover.active\:bg-button-secondary-background-active.disabled\:bg-button-secondary-background.focus\:bg-button-secondary-background-focus.text-button-secondary-foreground.focus\:text-button-secondary-foreground-focus.active\:text-button-secondary-foreground-active.hover\:text-button-secondary-foreground-hover.disabled\:text-button-secondary-foreground.active\:shadow-button-active-pale.px-button-padding-md.orbit-button-primitive.font-base.duration-fast.group.relative.max-w-full.select-none.items-center.justify-center.border-none.text-center.leading-none.transition-all.\*\:align-middle.\[\&_\.orbit-loading-spinner\]\:stroke-current.w-full.flex-auto.rounded-150.tb\:rounded-100.cursor-pointer.hover\:no-underline.focus\:no-underline.active\:no-underline.flex.font-medium > div")
     CLOSE = (By.CSS_SELECTOR, "#cookie_consent > div > div > div > div > button > div > svg")
-    CLASS = (By.CSS_SELECTOR, "#react-view > div.flex.min-h-screen.flex-col > div:nth-child(2) > div.min-h-\[388px\].relative.lm\:min-h-\[391px\].lm\:bg-ink-normal.lm\:pt-1000.pt-600.tb\:pt-\[58px\].tb\:pb-\[36px\].de\:pt-\[90px\].ld\:pt-\[60px\] > div.relative > div:nth-child(2) > div.relative.z-10.rounded-150.bg-white-normal.lm\:shadow-level3.-mt-300.translate-y-300.px-300.pt-400.pb-300.shadow-level3.min-h-\[378px\].lm\:-mt-800.lm\:min-h-\[252px\].lm\:translate-y-800.lm\:p-400.tb\:mt-0.tb\:min-h-\[264px\].tb\:transform-none.de\:rounded-200.de\:p-600.de\:pt-300.de\:min-h-\[268px\].ld\:min-h-\[160px\].ld\:pb-400 > div.lm\:mb-100.mb-300.flex.items-center.tb\:justify-start.justify-between > div:nth-child(2) > div:nth-child(1) > div > div.tb\:block.hidden > div > div.orbit-button-primitive-content.inline-block.\[justify-content\:var\(--button-content-align\)\].text-start.flex-1 > div")
-    ECCONOMY = (By.CSS_SELECTOR,'#«r2» > div > div.overflow-auto.rounded-t-modal.absolute.left-0.w-full.bg-white-normal.bottom-\[var\(--actions-height\)\].p-0.lm\:max-h-\[var\(--max-height\)\].lm\:rounded-100.lm\:bottom-auto.lm\:left-auto.lm\:relative > div > a:nth-child(1) > label')
-    PREMIUM = (By.CSS_SELECTOR, "#«r2» > div > div.overflow-auto.rounded-t-modal.absolute.left-0.w-full.bg-white-normal.bottom-\[var\(--actions-height\)\].p-0.lm\:max-h-\[var\(--max-height\)\].lm\:rounded-100.lm\:bottom-auto.lm\:left-auto.lm\:relative > div > a:nth-child(2) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span")
-    BUISSNESS = (By.CSS_SELECTOR, "#«r2» > div > div.overflow-auto.rounded-t-modal.absolute.left-0.w-full.bg-white-normal.bottom-\[var\(--actions-height\)\].p-0.lm\:max-h-\[var\(--max-height\)\].lm\:rounded-100.lm\:bottom-auto.lm\:left-auto.lm\:relative > div > a:nth-child(3) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span")
-    FIRSTCLASS = (By.CSS_SELECTOR, "#«r2» > div > div.overflow-auto.rounded-t-modal.absolute.left-0.w-full.bg-white-normal.bottom-\[var\(--actions-height\)\].p-0.lm\:max-h-\[var\(--max-height\)\].lm\:rounded-100.lm\:bottom-auto.lm\:left-auto.lm\:relative > div > a:nth-child(4) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span")
-    MIXED = (By.CSS_SELECTOR, "#«r2» > div > div.overflow-auto.rounded-t-modal.absolute.left-0.w-full.bg-white-normal.bottom-\[var\(--actions-height\)\].p-0.lm\:max-h-\[var\(--max-height\)\].lm\:rounded-100.lm\:bottom-auto.lm\:left-auto.lm\:relative > div > div > div > label > div.ms-200.flex.flex-1.flex-col.opacity-100 > span")
+    CLASS = (By.CSS_SELECTOR, "div.lm\:mb-100.mb-300.flex.items-center.tb\:justify-start.justify-between > div:nth-child(2) > div:nth-child(1) > div")
+    ECCONOMY = (By.CSS_SELECTOR,'div > a:nth-child(1) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span')
+    PREMIUM = (By.CSS_SELECTOR, "div > a:nth-child(2) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span")
+    BUISSNESS = (By.CSS_SELECTOR, "a:nth-child(3) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span")
+    FIRSTCLASS = (By.CSS_SELECTOR, ' a:nth-child(4) > label > div.ms-200.flex.flex-1.flex-col.font-medium.opacity-100 > span')
+    MIXED = (By.CSS_SELECTOR, '[data-test="MixedClassText"]')
     PASSENGER = (By.CSS_SELECTOR, '[data-test="PassengersButton"]')
     ADULT_PLUS = (By.CSS_SELECTOR, '[aria-label="Add adult"]')
     ADULTS = (By.CSS_SELECTOR,'[aria-labelledby="passengersPicker-adults"]')
@@ -75,6 +77,7 @@ class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step("Choose trip type: {trip_type}")
     def choose_trip(self, trip_type: str)-> str:
         try:
             time.sleep(3)
@@ -165,12 +168,13 @@ class MainPage(BasePage):
                 return "One way"
             return "Return"
 
+    @allure.step("Choose class type: {class_type}")
     def choose_class(self, class_type: str, mixed: bool = False) -> str:
         c= ""
         self.click(self.CLASS)
         if class_type == "premium":
             self.click(self.PREMIUM)
-        elif class_type == "buissness":
+        elif class_type == "business":
             self.click(self.BUISSNESS)
         elif class_type == "firstclass":
             self.click(self.FIRSTCLASS)
@@ -183,7 +187,7 @@ class MainPage(BasePage):
         c = self.get_text(self.CLASS)
         return c
 
-
+    @allure.step("Choose passenger: Adults={adults}, Children={children}, Infants={infants}, Cabin={cabin}, Checked={checked}")
     def choose_passenger(self, adults: int, children: int, infants: int, cabin: int = 0, checked: int = 0) -> str:
         # Helper function to get count from passenger elements
         def get_count(locator, default_value=0):
@@ -321,7 +325,7 @@ class MainPage(BasePage):
             elements[index].click()
             return True, None
 
-
+    @allure.step("Choose origin city: {origin}")
     def choose_origin(self, origin: str, index: int = 0, close: bool = True) -> str:
         if close:
             self.click(self.ORIGIN_CLOSE)
@@ -357,6 +361,7 @@ class MainPage(BasePage):
             print(f"Error getting place text: {e}")
             return "Could not retrieve selected place"
 
+    @allure.step("Choose destination city: {destination}")
     def choose_destination(self, destination: str,index: int = 0,close: bool = False) -> str:
             if close:
                 self.click(self.ORIGIN_CLOSE)
@@ -393,6 +398,7 @@ class MainPage(BasePage):
                 return "Could not retrieve selected destination"
 
 
+    @allure.step("Choose dates: Start={start_date}, End={end_date}")
     def choose_dates(self, start_date: str, end_date: str,cancel: bool)->str:
         self.click(self.DEPARTURE_DATE)
         time.sleep(3)
@@ -465,6 +471,7 @@ class MainPage(BasePage):
         output = self.get_value(self.RETURN_DATE)+ " , " + self.get_value(self.DEPARTURE_DATE)  # Changed from self.RETURN
         return output
 
+    @allure.step("Choose departure date: {departure_date}")
     def choose_departure_date(self, departure_date: str)->str:
         """
         Select only the departure date without needing to select a return date.
@@ -478,7 +485,7 @@ class MainPage(BasePage):
         def is_enabled(el):
             aria_disabled = el.get_attribute("aria-disabled")
             class_attr = el.get_attribute("class") or ""
-            return (not aria_disabled or aria_disabled == "false") and ("is-disabled" not in class_attr)
+            return (not aria_disabled or aria-disabled == "false") and ("is-disabled" not in class_attr)
 
         def get_calendar_month_year():
             try:
@@ -538,6 +545,7 @@ class MainPage(BasePage):
         output = self.get_value(self.DEPARTURE_DATE)
         return output
 
+    @allure.step("Choose return date: {return_date}")
     def choose_return_date(self, return_date: str) -> str:
         self.click(self.RETURN_DATE)  # Changed from self.RETURN
         time.sleep(3)
@@ -616,23 +624,27 @@ class MainPage(BasePage):
 
 
 
-    def link_checker_same(self, locator,tab: str) -> bool:
+    def link_checker_same(self, locator, tab: str) -> bool:
         self.click(locator)
         time.sleep(2)
-        if tab == "Travel Hacks":
+        tab_lower = tab.lower()
+        if tab_lower == "travel hacks":
             self.click(self.ACCEPT)
             btn_text = self.get_text(self.TRAVLE_HACKS_BTN).lower()
             print(f"h1 text: {btn_text}")
-            result = tab.lower() in btn_text.lower()
-            return result
-        if tab == "Deals":
+            return tab_lower in btn_text
+        elif tab_lower == "deals":
             h4_text = self.get_text(self.DEALS_H4).lower()
             print(f"h4 text: {h4_text}")
-            result = tab.lower() in h4_text.lower()
-            return result
-        return None
+            return tab_lower in h4_text
+        else:
+            # Add fallback: check page title or URL
+            title = self.driver.title.lower()
+            url = self.driver.current_url.lower()
+            print(f"Title: {title}, URL: {url}")
+            return tab_lower in title or tab_lower in url
 
-    def link_checker_diff(self, locator, tab: str)->bool:
+    def link_checker_diff(self, locator, tab: str) -> bool:
         self.click(locator)
         time.sleep(2)
         original_window = self.driver.current_window_handle
@@ -641,22 +653,33 @@ class MainPage(BasePage):
         if new_handles:
             self.driver.switch_to.window(new_handles[0])
             time.sleep(3)
-            if tab == "Stay":
-                h1_text = self.get_text(self.STAYS_H1)
-                print(f"h1 text: {h1_text}")
-                result = tab.lower() in h1_text.lower()
-            elif tab == "Magazine":
-                title = self.driver.title
+            tab_lower = tab.lower()
+            result = False
+            if tab_lower == "stay":
+                try:
+                    h1_text = self.get_text(self.STAYS_H1).lower()
+                    print(f"h1 text: {h1_text}")
+                    result = tab_lower in h1_text
+                except Exception as e:
+                    print(f"Error getting STAYS_H1: {e}")
+            elif tab_lower == "magazine":
+                title = self.driver.title.lower()
                 print(f"Page title: {title}")
-                result = tab.lower() in title.lower()
-            elif tab == "Help":
-                title = self.driver.title
+                result = tab_lower in title
+            elif tab_lower == "help":
+                title = self.driver.title.lower()
                 print(f"Page title: {title}")
-                result = tab.lower() in title.lower()
-            else:
-                url = self.driver.current_url
+                result = tab_lower in title
+            elif tab_lower == "cars":
+                url = self.driver.current_url.lower()
                 print(f"URL of new page: {url}")
-                result = tab.lower() in url.lower()
+                result = tab_lower in url or tab_lower in self.driver.title.lower()
+            else:
+                # Fallback: check URL and title
+                url = self.driver.current_url.lower()
+                title = self.driver.title.lower()
+                print(f"URL: {url}, Title: {title}")
+                result = tab_lower in url or tab_lower in title
             self.driver.close()
             self.driver.switch_to.window(original_window)
             return result

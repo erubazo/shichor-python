@@ -1,5 +1,7 @@
 import time
 import datetime
+
+import allure
 import requests  # Add this import
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -57,6 +59,7 @@ class SignInPage(BasePage):
         from pages.main_page import MainPage
         return MainPage(self.driver)
 
+    @allure.step("Sign up with incorrect email: {email}")
     def incorrect_email(self,email)-> str:
         self.main_page.click(self.main_page.ACCEPT)
         self.wait_for_element(self.main_page.SIGN_IN, condition="clickable")
@@ -78,6 +81,7 @@ class SignInPage(BasePage):
         print(gettext)
         return gettext
 
+    @allure.step("Sign up with wrong email format: {email}")
     def wrong_format(self,email)-> str:
         self.main_page.click(self.main_page.ACCEPT)
         self.wait_for_element(self.main_page.SIGN_IN, condition="clickable")
@@ -95,6 +99,7 @@ class SignInPage(BasePage):
         print(gettext)
         return gettext
 
+    @allure.step("Sign in with incorrect booking details: email: {email}, booking number: {booking_num}, day: {day}, month: {month}, year: {year}, iata: {iata}")
     def incorrect_booking(self,email, booking_num:str,day:str, month:str, year:str,iata:str):
         self.main_page.click(self.main_page.ACCEPT)
         self.wait_for_element(self.main_page.SIGN_IN, condition="clickable")

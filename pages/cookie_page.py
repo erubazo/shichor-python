@@ -1,4 +1,6 @@
 import time
+
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from pages.main_page import MainPage
@@ -17,6 +19,7 @@ class CookiePage(BasePage):
         from pages.main_page import MainPage
         return MainPage(self.driver)
 
+    @allure.step("Click on an element if it is displayed and enabled")
     def click_radio_if_visible(self, locator):
         try:
             elem = self.driver.find_element(*locator)
@@ -27,6 +30,7 @@ class CookiePage(BasePage):
         except Exception as e:
             print(f"Radio element {locator} not found: {e}")
 
+    @allure.step("Customize cookies based on user preferences")
     def customize_cookies(self, accept: bool, performence: bool, marketing: bool, save: bool):
         main_page= MainPage(self.driver)
         time.sleep(3)
