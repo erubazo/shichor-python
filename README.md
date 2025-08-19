@@ -2,6 +2,8 @@
 
 This repository contains automated tests for the Shichor web application using Python and popular testing frameworks. The project is organized for maintainability and scalability, supporting UI and functional testing.
 
+<img width="1902" height="857" alt="image" src="https://github.com/user-attachments/assets/2bd45083-149e-405d-9782-32b26f323b7c" />
+
 ## Project Structure
 
 ```
