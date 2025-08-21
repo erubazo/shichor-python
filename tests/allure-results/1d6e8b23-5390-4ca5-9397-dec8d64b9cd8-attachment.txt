@@ -1,0 +1,56 @@
+Cookies accepted.
+Trying to fill origin with locator: ('css selector', '#origin') and value: New York
+Origin city list texts after fill_text:
+- New York, United States
+- 250 km around New York
+- JFK John F. Kennedy International
+21 km from the city center
+- EWR Newark Liberty International
+14 km from the city center
+- LGA LaGuardia
+13 km from the city center
+- SWF New York Stewart International Airport
+88 km from the city center
+- New York
+Clicking element with text: New York, United States
+Trying to fill origin with locator: ('css selector', '#origin') and value: London
+Origin city list texts after fill_text:
+- London, United Kingdom
+- 250 km around London
+- LGW Gatwick
+40 km from the city center
+- LHR Heathrow
+23 km from the city center
+- STN London Stansted
+49 km from the city center
+- LTN Luton
+44 km from the city center
+- LCY London City
+13 km from the city center
+- SEN London Southend
+57 km from the city center
+- London, Canada
+- East London, South Africa
+- Greater London
+- Londonderry County
+Clicking element with text: London, United Kingdom
+- Tel Aviv, Israel
+- 250 km around Tel Aviv
+- TLV Ben Gurion
+13 km from the city center
+Clicking element with text: Tel Aviv, Israel
+- Paris, France
+- 250 km around Paris
+- CDG Charles de Gaulle Airport
+22 km from the city center
+- ORY Paris Orly
+15 km from the city center
+- BVA Beauvais–Tillé
+69 km from the city center
+- XCR Châlons Vatry
+136 km from the city center
+- Autoroute Utrecht Paris
+- Greater Paris
+- Saint Andrew Parish, Dominica
+- Autoroute Paris - Bordeaux (A10)
+Clicking element with text: Paris, France

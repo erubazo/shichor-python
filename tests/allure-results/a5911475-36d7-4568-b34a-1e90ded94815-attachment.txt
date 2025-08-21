@@ -1,0 +1,2 @@
+Selecting currency: euro
+eur

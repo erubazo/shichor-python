@@ -11,11 +11,11 @@ from pages.main_page import MainPage
 
 
 class SignInPage(BasePage):
-    SIGN_UP_BUTTON = (By.CSS_SELECTOR, r'#react-view > div.orbit-modal-body.z-overlay.font-base.fixed.inset-0.box-border.size-full.overflow-x-hidden.outline-none.bg-\[black\]\/50.lm\:overflow-y-auto.lm\:p-1000.lm\:bg-\[black\]\/50 > div > div > div.flex.items-center.flex-col.pt-\[32px\] > div.orbit-box.font-base.box-border.flex.items-center > button')
+    SIGN_UP_BUTTON = (By.CSS_SELECTOR, 'div.orbit-box.font-base.box-border.flex.items-center > button')
     EMAIL_INPUT = (By.CSS_SELECTOR, '[data-test="MagicLogin-Email"]')
     CONTINUE_BTN = (By.CSS_SELECTOR, '[data-test="MagicLogin-Continue"]')
-    PASS = (By.CSS_SELECTOR, r'#react-view > div.orbit-modal-body.z-overlay.font-base.fixed.inset-0.box-border.size-full.overflow-x-hidden.outline-none.bg-\[black\]\/50.lm\:overflow-y-auto.lm\:p-1000.lm\:bg-\[black\]\/50 > div > div > section > form > div.group.w-full.flex.items-center.justify-center.has-\[\:disabled\]\:opacity-30.mb-\[32px\] > div:nth-child(2) > input')
-    ERROR = (By.CSS_SELECTOR, r'#react-view > div.orbit-modal-body.z-overlay.font-base.fixed.inset-0.box-border.size-full.overflow-x-hidden.outline-none.bg-\[black\]\/50.lm\:overflow-y-auto.lm\:p-1000.lm\:bg-\[black\]\/50 > div > div > section > form > p.orbit-text.font-base.text-small.leading-small.font-normal.text-critical-foreground.\[\&_a\:not\(\.orbit-text-link\)\]\:text-link-critical-foreground.hover\:\[\&_a\:not\(\.orbit-text-link\)\]\:text-link-critical-foreground-hover.active\:\[\&_a\:not\(\.orbit-text-link\)\]\:text-link-critical-foreground-active.text-start.mb-400.m-0.\[\&_a\:not\(\.orbit-text-link\)\]\:font-medium.\[\&_a\:not\(\.orbit-text-link\)\]\:underline.hover\:\[\&_a\:not\(\.orbit-text-link\)\]\:no-underline.active\:\[\&_a\:not\(\.orbit-text-link\)\]\:no-underline.hover\:\[\&_a\:not\(\.orbit-text-link\)\]\:outline-none.active\:\[\&_a\:not\(\.orbit-text-link\)\]\:outline-none')
+    PASS = (By.CSS_SELECTOR, '[aria-label="Please enter the 6-digit code"]')
+    ERROR = (By.XPATH, "/html/body/div[2]/div/div/section/form/p[1]")
     INCORRECT_EMAIL = (By.CSS_SELECTOR, '[data-test="MagicLogin-IncorrectEmail"]')
     BOOKING_NUMBER = (By.CSS_SELECTOR, '[data-test="MagicLogin-BookingId"]')
     DAY = (By.CSS_SELECTOR, '[data-test="MagicLogin-DateInput-Date"]')
@@ -24,8 +24,8 @@ class SignInPage(BasePage):
     IATA = (By.CSS_SELECTOR, '[data-test="MagicLogin-IATAPickerInput"]')
     AIRPORT = (By.CSS_SELECTOR, 'div.pe-300.flex.w-full.flex-col.justify-center')
     SUMBIT = (By.CSS_SELECTOR, '[data-test="MagicLogin-GetSingleBookingSubmit"]')
-    ERROR2 = (By.CSS_SELECTOR, r'#react-view > div.orbit-modal-body.z-overlay.font-base.fixed.inset-0.box-border.size-full.overflow-x-hidden.outline-none.bg-\[black\]\/50.lm\:overflow-y-auto.lm\:p-1000.lm\:bg-\[black\]\/50 > div > div > section > form > div > div.orbit-stack.items-start.content-start.flex-nowrap.grow.shrink-0.justify-start.flex-col.flex.gap-400.w-full > div.orbit-alert.rounded-150.text-ink-dark.font-base.text-normal.p-300.relative.box-border.flex.w-full.border.border-t-\[3px\].leading-normal.lm\:border-s-\[3px\].lm\:border-t.tb\:rounded-100.bg-red-light.border-red-light-hover.lm\:border-t-red-light-hover.border-t-red-normal.lm\:border-s-red-normal > div.flex.flex-1.flex-col.items-center > div > p')
-    ERROR3 = (By.CSS_SELECTOR, r'#react-view > div.orbit-modal-body.z-overlay.font-base.fixed.inset-0.box-border.size-full.overflow-x-hidden.outline-none.bg-\[black\]\/50.lm\:overflow-y-auto.lm\:p-1000.lm\:bg-\[black\]\/50 > div > div > section > form > div.orbit-alert.rounded-150.text-ink-dark.font-base.text-normal.p-300.relative.box-border.flex.w-full.border.border-t-\[3px\].leading-normal.lm\:border-s-\[3px\].lm\:border-t.tb\:rounded-100.bg-red-light.border-red-light-hover.lm\:border-t-red-light-hover.border-t-red-normal.lm\:border-s-red-normal > div.flex.flex-1.flex-col.items-center > div')
+    ERROR2 = (By.CSS_SELECTOR,'div.flex.flex-1.flex-col.items-center > div > p')
+    ERROR3 = (By.XPATH, '/html/body/div[2]/div/div/section/form/div[2]/div[2]/div')
 
 
     def __init__(self, driver):
@@ -72,7 +72,7 @@ class SignInPage(BasePage):
         self.click(self.CONTINUE_BTN)
 
         # Wait for password field to appear
-        self.wait_for_element(self.PASS, condition="visible")
+        time.sleep(2)
         self.fill_text(self.PASS, "12345678")
 
         # Wait for error message to appear
@@ -133,7 +133,7 @@ class SignInPage(BasePage):
         self.wait_for_element(self.AIRPORT, condition="clickable")
         self.click(self.AIRPORT)
 
-        self.wait_for_element(self.SUMBIT, condition="clickable")
+        time.sleep(2)
         self.click(self.SUMBIT)
 
         # Wait for error message to appear

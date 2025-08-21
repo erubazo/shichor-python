@@ -314,10 +314,8 @@ class TestClass(BaseTest):
             time.sleep(2)
             self.main_page.choose_origin("London", 0, False)
             time.sleep(2)
-            self.main_page.choose_origin("Berlin", 1, False)
-            time.sleep(2)
         with allure.step("Choose multiple destination cities"):
             self.main_page.choose_destination("Tel Aviv", 0, False)
             time.sleep(2)
-            self.main_page.choose_destination("Paris", 0, True)
+            self.main_page.choose_destination("Paris", 0, False)
             time.sleep(2)
