@@ -2,6 +2,8 @@ import time
 import pytest
 import allure
 from allure_commons.types import Severity
+
+from pages.cookie_page import CookiePage
 from tests.base_test import BaseTest
 
 
@@ -15,14 +17,20 @@ class TestClass(BaseTest):
     @allure.description("Test to check coin change")
     @allure.title("Coin Change Test")
     def test_01_change_coin(self):
-        self.currency_page.select_currency("Euro")
+        with allure.step("Accept cookies if present"):
+            CookiePage(self.main_page.driver).accept_if_present()
+        with allure.step("Changing currency to Euro"):
+            self.currency_page.select_currency("Euro")
 
     @allure.severity(Severity.NORMAL)
     @allure.story("Changing Region")
     @allure.description("Test to check country change")
     @allure.title("Country Change Test")
     def test_02_change_region(self):
-        self.currency_page.select_region("United States","English")
+        with allure.step("Accept cookies if present"):
+            CookiePage(self.main_page.driver).accept_if_present()
+        with allure.step("Changing region to United States and language to English"):
+            self.currency_page.select_region("United States", "English")
 
 
 

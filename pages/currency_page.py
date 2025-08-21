@@ -23,7 +23,6 @@ class CurrencyPage(BasePage):
 
     @allure.step("Select currency: {coin} from the dropdown")
     def select_currency(self, coin: str):
-        self.main_page.click(self.main_page.ACCEPT)
         self.main_page.click(self.main_page.CURRENCY)
         time.sleep(1)
         self.click(self.CURRENCY_SELECTOR)
@@ -39,7 +38,6 @@ class CurrencyPage(BasePage):
 
     @allure.step("Select country: {country} and language: {lan} from the dropdown")
     def select_region(self, country: str, lan: str = "English"):
-        self.main_page.click(self.main_page.ACCEPT)
         self.main_page.click(self.main_page.CURRENCY)
         time.sleep(1)
         countries = self.driver.find_elements(*self.REGION_SELECTOR)

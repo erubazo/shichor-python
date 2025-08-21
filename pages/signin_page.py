@@ -61,7 +61,6 @@ class SignInPage(BasePage):
 
     @allure.step("Sign up with incorrect email: {email}")
     def incorrect_email(self,email)-> str:
-        self.main_page.click(self.main_page.ACCEPT)
         self.wait_for_element(self.main_page.SIGN_IN, condition="clickable")
         self.click(self.main_page.SIGN_IN)
         self.wait_for_element(self.SIGN_UP_BUTTON, condition="clickable")
@@ -83,7 +82,6 @@ class SignInPage(BasePage):
 
     @allure.step("Sign up with wrong email format: {email}")
     def wrong_format(self,email)-> str:
-        self.main_page.click(self.main_page.ACCEPT)
         self.wait_for_element(self.main_page.SIGN_IN, condition="clickable")
         self.click(self.main_page.SIGN_IN)
         self.wait_for_element(self.SIGN_UP_BUTTON, condition="clickable")
@@ -101,7 +99,6 @@ class SignInPage(BasePage):
 
     @allure.step("Sign in with incorrect booking details: email: {email}, booking number: {booking_num}, day: {day}, month: {month}, year: {year}, iata: {iata}")
     def incorrect_booking(self,email, booking_num:str,day:str, month:str, year:str,iata:str):
-        self.main_page.click(self.main_page.ACCEPT)
         self.wait_for_element(self.main_page.SIGN_IN, condition="clickable")
         self.click(self.main_page.SIGN_IN)
         self.wait_for_element(self.INCORRECT_EMAIL, condition="clickable")
