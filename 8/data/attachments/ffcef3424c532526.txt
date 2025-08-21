@@ -1,0 +1,24 @@
+Error accepting cookies: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[data-test="CookiesPopup-Accept"]"}
+  (Session info: chrome=139.0.7258.127); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+#0 0x557fc102201a <unknown>
+#1 0x557fc0ac1a70 <unknown>
+#2 0x557fc0b13907 <unknown>
+#3 0x557fc0b13b01 <unknown>
+#4 0x557fc0b61d54 <unknown>
+#5 0x557fc0b3940d <unknown>
+#6 0x557fc0b5f14f <unknown>
+#7 0x557fc0b391b3 <unknown>
+#8 0x557fc0b0559b <unknown>
+#9 0x557fc0b06971 <unknown>
+#10 0x557fc0fe71eb <unknown>
+#11 0x557fc0feaf39 <unknown>
+#12 0x557fc0fce2c9 <unknown>
+#13 0x557fc0febae8 <unknown>
+#14 0x557fc0fb2baf <unknown>
+#15 0x557fc100f0a8 <unknown>
+#16 0x557fc100f286 <unknown>
+#17 0x557fc1020ff6 <unknown>
+#18 0x7f027209caa4 <unknown>
+#19 0x7f0272129c3c <unknown>
+
