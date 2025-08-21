@@ -17,7 +17,7 @@ class MainPage(BasePage):
     TRIP2 = (By.CSS_SELECTOR, '[data-test="SearchFormModesPicker-active-oneWay"]')
     ONEWAY = (By.CSS_SELECTOR, '[data-test="ModePopupOption-oneWay"]')
     RETURN_OPTION = (By.CSS_SELECTOR, '[data-test="ModePopupOption-return"]')  # Renamed from RETURN
-    ACCEPT = (By.CSS_SELECTOR, "#cookies_accept > div")
+    ACCEPT = (By.CSS_SELECTOR, '[data-test="CookiesPopup-Accept"]')
     CUSTOMIZE = (By.CSS_SELECTOR, r"#cookie_consent > div > div > div > section > div.orbit-stack.items-start.content-start.flex-nowrap.grow.shrink-0.justify-start.flex-row.flex.gap-400.w-full > button.space-x-200.rtl\:space-x-reverse.h-form-box-normal.text-normal.bg-button-secondary-background.hover\:bg-button-secondary-background-hover.active\:bg-button-secondary-background-active.disabled\:bg-button-secondary-background.focus\:bg-button-secondary-background-focus.text-button-secondary-foreground.focus\:text-button-secondary-foreground-focus.active\:text-button-secondary-foreground-active.hover\:text-button-secondary-foreground-hover.disabled\:text-button-secondary-foreground.active\:shadow-button-active-pale.px-button-padding-md.orbit-button-primitive.font-base.duration-fast.group.relative.max-w-full.select-none.items-center.justify-center.border-none.text-center.leading-none.transition-all.\*\:align-middle.\[\&_\.orbit-loading-spinner\]\:stroke-current.w-full.flex-auto.rounded-150.tb\:rounded-100.cursor-pointer.hover\:no-underline.focus\:no-underline.active\:no-underline.flex.font-medium > div")
     CLOSE = (By.CSS_SELECTOR, "#cookie_consent > div > div > div > div > button > div > svg")
     CLASS = (By.CSS_SELECTOR, r"div.lm\:mb-100.mb-300.flex.items-center.tb\:justify-start.justify-between > div:nth-child(2) > div:nth-child(1) > div")
