@@ -49,7 +49,7 @@ data/                     # Test data files
    ```
 2. Install dependencies:
    ```bash
-   pip install -r requriements.txt
+   pip install -r requirements.txt
    ```
 3. Configure environment variables in `config.ini` as needed.
 
