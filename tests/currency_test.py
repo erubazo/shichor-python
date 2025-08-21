@@ -2,12 +2,7 @@ import time
 import pytest
 import allure
 from allure_commons.types import Severity
-from selenium.webdriver.chrome import webdriver
-from selenium.webdriver.common.devtools.v136.page import navigate
-from urllib3 import request
-from pages.main_page import MainPage
 from tests.base_test import BaseTest
-from pages.cookie_page import CookiePage
 
 
 @pytest.mark.usefixtures("setup_driver_class")
