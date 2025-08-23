@@ -4,7 +4,7 @@ on:
   workflow_dispatch:          # manual trigger only
 
 permissions:
-  contents: write             # allows push to gh-pages
+  contents: write  # מאפשר push ל-gh-pages
 
 jobs:
   merge_test:
@@ -13,40 +13,16 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      # 1) Check out code
+      # 1 Check out code
       - uses: actions/checkout@v4
 
-      # 2) Set up Python
+      # 2 Set up Python
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
 
-      # 3) Install Chrome & matching ChromeDriver (no libgconf-2-4)
-      - name: Install Chrome & ChromeDriver
-        shell: bash
-        run: |
-          set -euxo pipefail
-          sudo apt-get update
-          sudo apt-get install -y unzip xvfb wget curl ca-certificates
-
-          # Install Google Chrome (stable)
-          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          google-chrome --version
-
-          # Fetch the matching ChromeDriver for this Chrome major version
-          CHROME_MAJOR=$(google-chrome --version | sed -E 's/.* ([0-9]+)\..*/\1/')
-          DRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_MAJOR}")
-          echo "Chrome major: $CHROME_MAJOR  -> ChromeDriver: $DRIVER_VERSION"
-
-          wget -q "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip"
-          unzip -q chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-          chromedriver --version
-
-      # 4) Create venv & install Python dependencies
-      - name: Install Python dependencies
+      # 3 Create venv & install deps with pip
+      - name: Install dependencies
         shell: bash
         run: |
           python -m venv .venv
@@ -54,32 +30,30 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 5) Run pytest (Selenium) under Xvfb and collect Allure results
-      - name: Test with pytest (Selenium)
+      # 4 Run pytest under xvfb, save Allure results
+  # xvfb-run pytest -m devRun --alluredir=allure-results
+      - name: Test with pytest
         shell: bash
         run: |
           source .venv/bin/activate
-          export DISPLAY=:99
-          Xvfb :99 -ac &                     # start virtual display
-          xvfb-run -a pytest --alluredir=allure-results
+          xvfb-run pytest --alluredir=allure-results
 
-      # 6) Write build/git metadata into Allure environment.properties
+      # 5 Write build/git metadata into Allure
       - name: Add metadata to Allure
         if: always()
         working-directory: allure-results
-        shell: bash
         run: |
           {
             echo BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             echo GIT_BRANCH=${{ github.head_ref || github.ref_name }}
             echo GIT_COMMIT_ID=${{ github.sha }}
-            echo GIT_COMMIT_MESSAGE="$(git -C .. show -s --format=%s HEAD)"
-            echo GIT_COMMIT_AUTHOR_NAME="$(git -C .. show -s --format='%ae' HEAD)"
-            echo GIT_COMMIT_TIME="$(git -C .. show -s --format=%ci HEAD)"
+            echo GIT_COMMIT_MESSAGE=$(git show -s --format=%s HEAD)
+            echo GIT_COMMIT_AUTHOR_NAME=$(git show -s --format='%ae' HEAD)
+            echo GIT_COMMIT_TIME=$(git show -s --format=%ci HEAD)
             echo CHROME_VERSION=$(google-chrome --product-version)
           } >> environment.properties
 
-      # 7) Generate static Allure report
+      # 6 Generate static Allure report
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -89,7 +63,7 @@ jobs:
           gh_pages:       gh-pages
           allure_history: allure-history
 
-      # 8) Publish Allure history to GitHub Pages
+      # 7 Publish Allure history to GitHub Pages
       - name: Deploy report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
