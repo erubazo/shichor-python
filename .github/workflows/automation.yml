@@ -1,10 +1,10 @@
 name: automation demo
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:          # manual trigger only
 
 permissions:
-  contents: write
+  contents: write  # מאפשר push ל-gh-pages
 
 jobs:
   merge_test:
@@ -12,62 +12,51 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
+    container:
+      image: mcr.microsoft.com/playwright:v1.54.0   # browsers + xvfb pre‑installed
+
     steps:
-      # 1) Checkout
+      # 1 Check out code
       - uses: actions/checkout@v4
 
-      # 2) Python
+      # 2 Set up Python
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-          cache: "pip"
 
-      # 3) Install Google Chrome (for Selenium)
-      - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-      # Optional: show version for debugging
-      - run: google-chrome --version
-
-      # 4) Create venv & install deps (with writable pip cache)
+      # 3 Create venv & install deps with pip
       - name: Install dependencies
         shell: bash
-        env:
-          PIP_CACHE_DIR: ${{ runner.temp }}/pip-cache
         run: |
           python -m venv .venv
           source .venv/bin/activate
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-      # 5) Run pytest under xvfb, save Allure results
+      # 4 Run pytest under xvfb, save Allure results
+  # xvfb-run pytest -m devRun --alluredir=allure-results
       - name: Test with pytest
         shell: bash
         run: |
           source .venv/bin/activate
-          mkdir -p allure-results
-          # Selenium 4+ + Selenium Manager will auto-download the driver for the Chrome you installed
           xvfb-run pytest --alluredir=allure-results
 
-      # 6) Add metadata to Allure
+      # 5 Write build/git metadata into Allure
       - name: Add metadata to Allure
         if: always()
+        working-directory: allure-results
         run: |
-          REPO_DIR="${GITHUB_WORKSPACE}"
-          RESULT_DIR="allure-results"
-          mkdir -p "$RESULT_DIR"
           {
             echo BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             echo GIT_BRANCH=${{ github.head_ref || github.ref_name }}
             echo GIT_COMMIT_ID=${{ github.sha }}
-            echo GIT_COMMIT_MESSAGE=$(git -C "$REPO_DIR" show -s --format=%s HEAD)
-            echo GIT_COMMIT_AUTHOR_NAME=$(git -C "$REPO_DIR" show -s --format='%ae' HEAD)
-            echo GIT_COMMIT_TIME=$(git -C "$REPO_DIR" show -s --format=%ci HEAD)
-            echo CHROME_VERSION=$(google-chrome --product-version || echo unknown)
-          } >> "$RESULT_DIR/environment.properties"
+            echo GIT_COMMIT_MESSAGE=$(git show -s --format=%s HEAD)
+            echo GIT_COMMIT_AUTHOR_NAME=$(git show -s --format='%ae' HEAD)
+            echo GIT_COMMIT_TIME=$(git show -s --format=%ci HEAD)
+            echo CHROME_VERSION=$(google-chrome --product-version)
+          } >> environment.properties
 
-      # 7) Generate static Allure report
+      # 6 Generate static Allure report
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -77,7 +66,7 @@ jobs:
           gh_pages:       gh-pages
           allure_history: allure-history
 
-      # 8) Publish Allure history to GitHub Pages
+      # 7 Publish Allure history to GitHub Pages
       - name: Deploy report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
