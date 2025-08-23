@@ -1,0 +1,4 @@
+TRIP1 (return) available: False
+TRIP2 (oneway) available: False
+TRIP1 (return) available: False
+TRIP2 (oneway) available: False

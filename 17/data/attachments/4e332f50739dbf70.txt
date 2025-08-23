@@ -1,0 +1,50 @@
+Opening passenger selector...
+Error in choose_passenger: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[data-test="PassengersButton"]"}
+  (Session info: chrome=139.0.7258.127); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+#0 0x564c1af4401a <unknown>
+#1 0x564c1a9e3a70 <unknown>
+#2 0x564c1aa35907 <unknown>
+#3 0x564c1aa35b01 <unknown>
+#4 0x564c1aa83d54 <unknown>
+#5 0x564c1aa5b40d <unknown>
+#6 0x564c1aa8114f <unknown>
+#7 0x564c1aa5b1b3 <unknown>
+#8 0x564c1aa2759b <unknown>
+#9 0x564c1aa28971 <unknown>
+#10 0x564c1af091eb <unknown>
+#11 0x564c1af0cf39 <unknown>
+#12 0x564c1aef02c9 <unknown>
+#13 0x564c1af0dae8 <unknown>
+#14 0x564c1aed4baf <unknown>
+#15 0x564c1af310a8 <unknown>
+#16 0x564c1af31286 <unknown>
+#17 0x564c1af42ff6 <unknown>
+#18 0x7fe70429caa4 <unknown>
+#19 0x7fe704329c3c <unknown>
+
+Opening passenger selector...
+Error in choose_passenger: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[data-test="PassengersButton"]"}
+  (Session info: chrome=139.0.7258.127); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+#0 0x564c1af4401a <unknown>
+#1 0x564c1a9e3a70 <unknown>
+#2 0x564c1aa35907 <unknown>
+#3 0x564c1aa35b01 <unknown>
+#4 0x564c1aa83d54 <unknown>
+#5 0x564c1aa5b40d <unknown>
+#6 0x564c1aa8114f <unknown>
+#7 0x564c1aa5b1b3 <unknown>
+#8 0x564c1aa2759b <unknown>
+#9 0x564c1aa28971 <unknown>
+#10 0x564c1af091eb <unknown>
+#11 0x564c1af0cf39 <unknown>
+#12 0x564c1aef02c9 <unknown>
+#13 0x564c1af0dae8 <unknown>
+#14 0x564c1aed4baf <unknown>
+#15 0x564c1af310a8 <unknown>
+#16 0x564c1af31286 <unknown>
+#17 0x564c1af42ff6 <unknown>
+#18 0x7fe70429caa4 <unknown>
+#19 0x7fe704329c3c <unknown>
+
