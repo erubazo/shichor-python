@@ -4,68 +4,69 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write  # allows push to gh-pages
 
 jobs:
   merge_test:
-    name: Run pytest & publish Allure
+    name: Run pytest & publish Allure (Selenium)
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
-      # 1) Checkout
+      # 1) Check out code
       - uses: actions/checkout@v4
 
-      # 2) Python
+      # 2) Set up Python
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-          cache: "pip"
 
       # 3) Install Google Chrome (for Selenium)
-      - name: Set up Chrome
+      - name: Setup Google Chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
-      # Optional: show version for debugging
-      - run: google-chrome --version
 
-      # 4) Create venv & install deps (with writable pip cache)
+      - name: Show Chrome version
+        run: |
+          echo "Chrome path: ${{ steps.setup-chrome.outputs.chrome-path }}"
+          echo "Chrome version: ${{ steps.setup-chrome.outputs.chrome-version }}"
+          ${{ steps.setup-chrome.outputs.chrome-path }} --version
+
+      # 4) Create venv & install Python deps
       - name: Install dependencies
         shell: bash
-        env:
-          PIP_CACHE_DIR: ${{ runner.temp }}/pip-cache
         run: |
           python -m venv .venv
           source .venv/bin/activate
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          python -V
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          # Make sure requirements.txt includes: selenium, pytest, allure-pytest
 
-      # 5) Run pytest under xvfb, save Allure results
+      # 5) Run pytest with Xvfb and save Allure results
       - name: Test with pytest
         shell: bash
         run: |
           source .venv/bin/activate
-          mkdir -p allure-results
-          # Selenium 4+ + Selenium Manager will auto-download the driver for the Chrome you installed
-          xvfb-run pytest --alluredir=allure-results
+          xvfb-run -a pytest --alluredir=allure-results
 
-      # 6) Add metadata to Allure
+      # 6) Write build/git metadata into Allure
       - name: Add metadata to Allure
         if: always()
+        working-directory: allure-results
+        shell: bash
         run: |
-          REPO_DIR="${GITHUB_WORKSPACE}"
-          RESULT_DIR="allure-results"
-          mkdir -p "$RESULT_DIR"
           {
             echo BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             echo GIT_BRANCH=${{ github.head_ref || github.ref_name }}
             echo GIT_COMMIT_ID=${{ github.sha }}
-            echo GIT_COMMIT_MESSAGE=$(git -C "$REPO_DIR" show -s --format=%s HEAD)
-            echo GIT_COMMIT_AUTHOR_NAME=$(git -C "$REPO_DIR" show -s --format='%ae' HEAD)
-            echo GIT_COMMIT_TIME=$(git -C "$REPO_DIR" show -s --format=%ci HEAD)
-            echo CHROME_VERSION=$(google-chrome --product-version || echo unknown)
-          } >> "$RESULT_DIR/environment.properties"
+            echo GIT_COMMIT_MESSAGE=$(git show -s --format=%s HEAD)
+            echo GIT_COMMIT_AUTHOR_NAME=$(git show -s --format='%ae' HEAD)
+            echo GIT_COMMIT_TIME=$(git show -s --format=%ci HEAD)
+            echo CHROME_VERSION=${{ steps.setup-chrome.outputs.chrome-version }}
+          } >> environment.properties
 
       # 7) Generate static Allure report
       - name: Generate Allure report
