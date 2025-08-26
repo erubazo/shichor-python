@@ -1,9 +1,0 @@
-[SEVERE] https://performance.radar.cloudflare.com/beacon.js - Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:49252 Uncaught
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:49252 Uncaught
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:49252 Uncaught
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:49252 Uncaught
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:49252 Uncaught
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:49252 Uncaught
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:49252 Uncaught
-[SEVERE] https://www.cloudflare.com/framework-957a522640f43541ca6a.js 1:121984 Uncaught
