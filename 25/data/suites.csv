@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Test to check coin change","25532","Coin Change Test","tests","Tue Aug 26 09:20:58 UTC 2025","broken","Tue Aug 26 09:21:23 UTC 2025","TestClass","currency_test","",""
+"Test to check cookie customization and retrieval","43003","Cookie Customization Test","tests","Tue Aug 26 09:21:50 UTC 2025","failed","Tue Aug 26 09:22:33 UTC 2025","TestClass","mainpage_test","",""
+"Test to check links on the main page","30644","Links check Test","tests","Tue Aug 26 09:22:33 UTC 2025","broken","Tue Aug 26 09:23:03 UTC 2025","TestClass","mainpage_test","",""
+"Test to check country change","25420","Country Change Test","tests","Tue Aug 26 09:21:24 UTC 2025","broken","Tue Aug 26 09:21:49 UTC 2025","TestClass","currency_test","",""
