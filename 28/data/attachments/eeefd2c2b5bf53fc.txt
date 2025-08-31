@@ -1,0 +1,46 @@
+Radio element ('css selector', '#cookie_consent > div > div > div > section > div.orbit-stack.mb-600.block.space-y-400.space-x-none.w-full > div:nth-child(2) > div.orbit-stack.items-start.content-start.flex-nowrap.grow.shrink.justify-start.flex-col.flex.gap-400.w-full > div.orbit-stack.mb-600.items-start.content-start.flex-nowrap.grow.shrink-0.justify-start.flex-row.inline-flex.gap-400 > label:nth-child(1)') not clickable: Message: 
+Stacktrace:
+#0 0x5644099df02a <unknown>
+#1 0x56440947ea70 <unknown>
+#2 0x5644094d0907 <unknown>
+#3 0x5644094d0b01 <unknown>
+#4 0x56440951ed54 <unknown>
+#5 0x5644094f640d <unknown>
+#6 0x56440951c14f <unknown>
+#7 0x5644094f61b3 <unknown>
+#8 0x5644094c259b <unknown>
+#9 0x5644094c3971 <unknown>
+#10 0x5644099a41fb <unknown>
+#11 0x5644099a7f49 <unknown>
+#12 0x56440998b2d9 <unknown>
+#13 0x5644099a8af8 <unknown>
+#14 0x56440996fbbf <unknown>
+#15 0x5644099cc0b8 <unknown>
+#16 0x5644099cc296 <unknown>
+#17 0x5644099de006 <unknown>
+#18 0x7f6646a9caa4 <unknown>
+#19 0x7f6646b29c3c <unknown>
+
+Radio element ('css selector', '#cookie_consent > div > div > div > section > div.orbit-stack.mb-600.block.space-y-400.space-x-none.w-full > div:nth-child(3) > div.orbit-stack.items-start.content-start.flex-nowrap.grow.shrink.justify-start.flex-col.flex.gap-400.w-full > div.orbit-stack.mb-600.items-start.content-start.flex-nowrap.grow.shrink-0.justify-start.flex-row.inline-flex.gap-400 > label:nth-child(1) > div.orbit-radio-icon-container.relative.box-border.flex.flex-none.items-center.justify-center.size-icon-medium.rounded-full.duration-fast.scale-100.transition-all.ease-in-out.border-solid.border.active\\:scale-95') not clickable: Message: 
+Stacktrace:
+#0 0x5644099df02a <unknown>
+#1 0x56440947ea70 <unknown>
+#2 0x5644094d0907 <unknown>
+#3 0x5644094d0b01 <unknown>
+#4 0x56440951ed54 <unknown>
+#5 0x5644094f640d <unknown>
+#6 0x56440951c14f <unknown>
+#7 0x5644094f61b3 <unknown>
+#8 0x5644094c259b <unknown>
+#9 0x5644094c3971 <unknown>
+#10 0x5644099a41fb <unknown>
+#11 0x5644099a7f49 <unknown>
+#12 0x56440998b2d9 <unknown>
+#13 0x5644099a8af8 <unknown>
+#14 0x56440996fbbf <unknown>
+#15 0x5644099cc0b8 <unknown>
+#16 0x5644099cc296 <unknown>
+#17 0x5644099de006 <unknown>
+#18 0x7f6646a9caa4 <unknown>
+#19 0x7f6646b29c3c <unknown>
+

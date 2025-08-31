@@ -1,3 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","0","test_simple","tests","Tue Aug 26 10:21:13 UTC 2025","passed","Tue Aug 26 10:21:13 UTC 2025","","mainpage_test","",""
-"","1","test_01_cookie_test","tests","Tue Aug 26 10:21:13 UTC 2025","passed","Tue Aug 26 10:21:13 UTC 2025","TestMainPage","mainpage_test","",""
