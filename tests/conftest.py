@@ -57,31 +57,6 @@ def _wait_page_ready(driver, timeout=60):
         lambda d: d.execute_script("return document.readyState") == "complete"
     )
 
-
-def _dismiss_cookie_banner_if_present(driver, timeout=4):
-    """
-    Dismiss common consent/cookie banners that block clicks in headless CI.
-    Adjust locator to your site if needed.
-    """
-    accept_locators = [
-        (By.CSS_SELECTOR, '[data-test="CookiesPopup-Accept"]'),
-        (By.CSS_SELECTOR, 'button#cookie-accept'),
-        (By.XPATH, "//button[contains(., 'Accept') or contains(., 'I Agree')]"),
-    ]
-    for loc in accept_locators:
-        try:
-            btn = WebDriverWait(driver, timeout, 0.2).until(EC.element_to_be_clickable(loc))
-            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", btn)
-            try:
-                btn.click()
-            except Exception:
-                driver.execute_script("arguments[0].click();", btn)
-            WebDriverWait(driver, 5, 0.2).until(EC.invisibility_of_element_located(loc))
-            return
-        except Exception:
-            continue  # try next locator; silently skip if none exist
-
-
 @pytest.fixture(scope="class")
 def setup_driver_class(request, chrome_options):
     """
@@ -107,8 +82,6 @@ def setup_driver_class(request, chrome_options):
     # Wait for full readiness (helps CI)
     _wait_page_ready(driver)
 
-    # Optional: dismiss cookie banner that appears in clean CI profiles
-    _dismiss_cookie_banner_if_present(driver)
 
     # Init your page objects
     from pages.cookie_page import CookiePage

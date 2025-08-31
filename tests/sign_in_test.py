@@ -17,7 +17,7 @@ class TestClass(BaseTest):
     @allure.title("failed signup Test")
     def test_01_failed_signup(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Attempt to sign up with incorrect email"):
             result = self.signin_page.incorrect_email("loyekab865@jxbav.com")
             assert result == "The code is incorrect or expired."
@@ -28,7 +28,7 @@ class TestClass(BaseTest):
     @allure.title("wrong format signup Test")
     def test_02_failed_wrong_format(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Attempt to sign up with wrong format email"):
             result = self.signin_page.wrong_format("11111111111")
             assert result == "Please use this format: your@email.com"
@@ -39,7 +39,7 @@ class TestClass(BaseTest):
     @allure.title("incorrect booking Test")
     def test_03_incorrect_code(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Attempt to sign in with incorrect booking code"):
             result = self.signin_page.incorrect_booking("barakqa@gmail.com",12345678,"29","9","1992","LAX")
             assert result == "Booking not found. Are all the details correct?"

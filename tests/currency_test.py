@@ -18,7 +18,7 @@ class TestClass(BaseTest):
     @allure.title("Coin Change Test")
     def test_01_change_coin(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Changing currency to Euro"):
             self.currency_page.select_currency("Euro")
 
@@ -28,7 +28,7 @@ class TestClass(BaseTest):
     @allure.title("Country Change Test")
     def test_02_change_region(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Changing region to United States and language to English"):
             self.currency_page.select_region("United States", "English")
 

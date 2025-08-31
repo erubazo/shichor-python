@@ -29,7 +29,7 @@ class TestClass(BaseTest):
     @allure.title("Links check Test")
     def test_02_links_check(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Check cars link on the main page"):
             cars = self.main_page.link_checker_diff(self.main_page.CARS, "Cars")
             print(cars)
@@ -59,7 +59,7 @@ class TestClass(BaseTest):
     @allure.title("trip ticket selection Test")
     def test_03_trip_ticket(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Select one-way trip"):
             self.main_page.choose_trip("oneway")
         with allure.step("Select return trip"):
@@ -72,7 +72,7 @@ class TestClass(BaseTest):
     @allure.title("class ticket selection Test")
     def test_04_class(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Select premium class"):
             self.main_page.choose_class("premium", True)
         with allure.step("Select business class"):
@@ -89,7 +89,7 @@ class TestClass(BaseTest):
     @allure.title("passengers ticket selection Test")
     def test_05_passengers(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Select 4 adults, 2 children, 1 infant, 1 senior, 1 youth"):
             self.main_page.choose_passenger(4, 2, 1, 1, 1)
         with allure.step("Select 2 adults, 1 child, 0 infant, 0 senior, 0 youth"):
@@ -103,7 +103,7 @@ class TestClass(BaseTest):
     @allure.title("origin selection Test")
     def test_06_origin(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose origin"):
             result = self.main_page.choose_origin("Los Angeles")
             assert result == "Los Angeles"
@@ -113,7 +113,7 @@ class TestClass(BaseTest):
     @allure.title("Destination selection Test")
     def test_07_destination(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose destination"):
             result = self.main_page.choose_destination("Tel Aviv")
             assert result == "Tel Aviv"
@@ -124,7 +124,7 @@ class TestClass(BaseTest):
     @allure.title("departure date selection Test")
     def test_08_departure_date(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose departure date"):
             result = self.main_page.choose_departure_date("2025-08-01")
             assert "1 Aug" in result
@@ -135,7 +135,7 @@ class TestClass(BaseTest):
     @allure.title("return date selection Test")
     def test_09_return_date(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose return date"):
             result = self.main_page.choose_return_date("2025-08-01")
             assert "1 Aug" in result
@@ -146,7 +146,7 @@ class TestClass(BaseTest):
     @allure.title("departure and return dates selection Test")
     def test_10_both_dates(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose departure and return dates"):
             result = self.main_page.choose_dates("2025-08-01", "2025-08-09", False)
             assert "1 Aug" in result and "9 Aug" in result
@@ -157,7 +157,7 @@ class TestClass(BaseTest):
     @allure.title("cancel departure and return dates selection Test")
     def test_11_both_dates_cancel(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose departure and return dates and cancel it"):
             result = self.main_page.choose_dates("2025-08-01", "2025-08-09", True)
             assert "Anytime" in result
@@ -168,7 +168,7 @@ class TestClass(BaseTest):
     @allure.title("Order first class ticket Test")
     def test_12_order_first(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose first class"):
             self.main_page.choose_class("firstclass")
             time.sleep(2)
@@ -199,7 +199,7 @@ class TestClass(BaseTest):
     @allure.title("economy ticket order Test")
     def test_13_order_economy(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose passengers"):
             self.main_page.choose_passenger(2, 1, 1, 1, 1)
             time.sleep(2)
@@ -227,7 +227,7 @@ class TestClass(BaseTest):
     @allure.title("premium class ticket selection Test")
     def test_14_order_premium(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose premium class"):
             self.main_page.choose_class("premium")
             time.sleep(2)
@@ -258,7 +258,7 @@ class TestClass(BaseTest):
     @allure.title("business class ticket selection Test")
     def test_15_order_business(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose business class"):
             self.main_page.choose_class("buissness")
             time.sleep(2)
@@ -289,7 +289,7 @@ class TestClass(BaseTest):
     @allure.title("switching location selection Test")
     def test_16_switch(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose origin"):
             self.main_page.choose_origin("New York")
             time.sleep(2)
@@ -311,7 +311,7 @@ class TestClass(BaseTest):
     @allure.title("Multiple cities selection Test")
     def test_17_multiple_cities(self):
         with allure.step("Accept cookies if present"):
-            CookiePage(self.main_page.driver).accept_if_present()
+            self.main_page.accept_cookies()
         with allure.step("Choose multiple origin cities"):
             self.main_page.choose_origin("New York", 0, False)
             time.sleep(2)
